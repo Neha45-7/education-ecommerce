@@ -1,0 +1,97 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="hero">
+  <div class="hero-text">
+    <span class="badge"> 🚀 Your Learning Marketplace </span>
+
+    <h1>
+      Learn More.<br />
+      <span>Achieve More.</span>
+    </h1>
+
+    <p>
+      Discover courses, study materials, books and educational resources from
+      trusted educators.
+    </p>
+
+    <a href="{{ url_for('products') }}" class="primary-btn">
+      Explore Learning 🚀
+    </a>
+  </div>
+
+  <div class="hero-card">
+    <div class="floating-card">📚</div>
+
+    <h2>Knowledge is Power</h2>
+
+    <p>Access quality educational resources in one place.</p>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    🎯
+    <h3>Quality Learning</h3>
+    <p>Curated educational resources.</p>
+  </div>
+
+  <div class="feature">
+    🛍️
+    <h3>Easy Shopping</h3>
+    <p>Find and purchase resources easily.</p>
+  </div>
+
+  <div class="feature">
+    🔐
+    <h3>Trusted Vendors</h3>
+    <p>Admin-approved educational products.</p>
+  </div>
+
+  <div class="feature">
+    💡
+    <h3>Learn Anywhere</h3>
+    <p>Resources available whenever you need.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🔥 Featured Learning Resources</h2>
+
+  <div class="product-grid">
+    {% for product in products %}
+
+    <div class="product-card">
+      <img src="{{ product['image'] }}" alt="{{ product['name'] }}" />
+
+      <div class="product-content">
+        <span class="category"> {{ product['category'] }} </span>
+
+        <h3>{{ product['name'] }}</h3>
+
+        <p>{{ product['description'] }}</p>
+
+        <div class="rating">⭐ {{ product['rating'] }}</div>
+
+        <div class="product-bottom">
+          <strong> ₹{{ product['price'] }} </strong>
+
+          <a
+            href="{{ url_for('add_to_cart',
+                                         product_id=product['id']) }}"
+            class="small-btn"
+          >
+            Add +
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {% else %}
+
+    <p>No approved products yet.</p>
+
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

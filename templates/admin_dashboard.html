@@ -1,0 +1,102 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <span class="badge"> 👑 Administrator </span>
+
+      <h1>Admin Dashboard</h1>
+
+      <p>Manage vendors and approve educational products.</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      ⏳
+      <h2>{{ pending_count }}</h2>
+      <p>Pending Products</p>
+    </div>
+
+    <div class="stat-card">
+      ✅
+      <h2>{{ approved_count }}</h2>
+      <p>Approved Products</p>
+    </div>
+
+    <div class="stat-card">
+      👥
+      <h2>{{ users|length }}</h2>
+      <p>Users & Vendors</p>
+    </div>
+  </div>
+
+  <h2>Product Approval Center</h2>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Vendor</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+
+      {% for product in products %}
+
+      <tr>
+        <td>{{ product["name"] }}</td>
+
+        <td>{{ product["vendor_name"] }}</td>
+
+        <td>{{ product["category"] }}</td>
+
+        <td>₹{{ product["price"] }}</td>
+
+        <td>
+          {% if product["status"] == "Approved" %}
+
+          <span class="approved"> ✓ Approved </span>
+
+          {% elif product["status"] == "Rejected" %}
+
+          <span class="rejected"> ✕ Rejected </span>
+
+          {% else %}
+
+          <span class="pending"> ⏳ Pending </span>
+
+          {% endif %}
+        </td>
+
+        <td>
+          {% if product["status"] == "Pending" %}
+
+          <a
+            href="{{ url_for('approve_product',
+                                       product_id=product['id']) }}"
+            class="approve-btn"
+          >
+            Approve
+          </a>
+
+          <a
+            href="{{ url_for('reject_product',
+                                       product_id=product['id']) }}"
+            class="reject-btn"
+          >
+            Reject
+          </a>
+
+          {% else %} — {% endif %}
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+  </div>
+</section>
+
+{% endblock %}

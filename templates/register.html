@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="auth-container">
+  <div class="auth-box">
+    <div class="auth-icon">🎓</div>
+
+    <h1>Create Account</h1>
+
+    <p>Join the EduMart community</p>
+
+    <form method="POST">
+      <label>Name</label>
+
+      <input type="text" name="name" placeholder="Your name" required />
+
+      <label>Email</label>
+
+      <input type="email" name="email" placeholder="Email" required />
+
+      <label>Password</label>
+
+      <input type="password" name="password" placeholder="Password" required />
+
+      <label>Account Type</label>
+
+      <select name="role">
+        <option value="user">Student / User</option>
+
+        <option value="vendor">Educator / Vendor</option>
+      </select>
+
+      <button class="primary-btn">Create Account</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

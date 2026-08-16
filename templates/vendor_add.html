@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="form-container">
+  <div class="form-box">
+    <h1>📚 Add Learning Resource</h1>
+
+    <p>
+      Your product will be reviewed by an administrator before appearing in the
+      marketplace.
+    </p>
+
+    <form method="POST">
+      <label>Product Name</label>
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Example: Python Masterclass"
+        required
+      />
+
+      <label>Description</label>
+
+      <textarea
+        name="description"
+        placeholder="Describe your educational resource"
+        required
+      >
+      </textarea>
+
+      <label>Category</label>
+
+      <select name="category">
+        <option>Programming</option>
+        <option>Mathematics</option>
+        <option>Science</option>
+        <option>Languages</option>
+        <option>Competitive Exams</option>
+      </select>
+
+      <label>Price</label>
+
+      <input type="number" name="price" placeholder="₹" required />
+
+      <label>Image URL</label>
+
+      <input type="text" name="image" placeholder="Paste image URL" required />
+
+      <button class="primary-btn">Submit for Approval 🚀</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

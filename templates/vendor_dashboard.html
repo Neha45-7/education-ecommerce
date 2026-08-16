@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <span class="badge"> 👨‍🏫 Vendor Panel </span>
+
+      <h1>Welcome, {{ session["name"] }}</h1>
+
+      <p>Manage your educational products.</p>
+    </div>
+
+    <a href="{{ url_for('vendor_add') }}" class="primary-btn">
+      + Add Product
+    </a>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      📚
+      <h2>{{ products|length }}</h2>
+      <p>Total Products</p>
+    </div>
+
+    <div class="stat-card">
+      ⏳
+      <h2>
+        {{ products|selectattr("status", "equalto","Pending")|list|length }}
+      </h2>
+      <p>Pending Approval</p>
+    </div>
+
+    <div class="stat-card">
+      ✅
+      <h2>
+        {{ products|selectattr("status", "equalto","Approved")|list|length }}
+      </h2>
+      <p>Approved</p>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Status</th>
+      </tr>
+
+      {% for product in products %}
+
+      <tr>
+        <td>{{ product["name"] }}</td>
+
+        <td>{{ product["category"] }}</td>
+
+        <td>₹{{ product["price"] }}</td>
+
+        <td>
+          {% if product["status"] == "Approved" %}
+
+          <span class="approved"> ✓ Approved </span>
+
+          {% elif product["status"] == "Rejected" %}
+
+          <span class="rejected"> ✕ Rejected </span>
+
+          {% else %}
+
+          <span class="pending"> ⏳ Pending </span>
+
+          {% endif %}
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+  </div>
+</section>
+
+{% endblock %}

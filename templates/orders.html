@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="section">
+  <h1>📦 My Orders</h1>
+
+  <div class="orders-grid">
+    {% for order in orders %}
+
+    <div class="order-card">
+      <img src="{{ order['image'] }}" />
+
+      <div>
+        <h3>{{ order['name'] }}</h3>
+
+        <p>Quantity: {{ order['quantity'] }}</p>
+
+        <strong> ₹{{ order['total'] }} </strong>
+
+        <p>{{ order['order_date'] }}</p>
+      </div>
+
+      <span class="approved"> ✓ Purchased </span>
+    </div>
+
+    {% else %}
+
+    <p>No orders yet.</p>
+
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

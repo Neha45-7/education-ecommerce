@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="section">
+  <div class="page-heading">
+    <h1>Explore Learning Resources 📚</h1>
+
+    <p>Discover courses, books and study materials.</p>
+  </div>
+
+  <form class="search-bar" method="GET">
+    <input type="text" name="search" placeholder="🔍 Search resources..." />
+
+    <select name="category">
+      <option value="">All Categories</option>
+
+      <option value="Programming">Programming</option>
+
+      <option value="Mathematics">Mathematics</option>
+
+      <option value="Science">Science</option>
+
+      <option value="Languages">Languages</option>
+
+      <option value="Competitive Exams">Competitive Exams</option>
+    </select>
+
+    <button class="primary-btn">Search</button>
+  </form>
+
+  <div class="product-grid">
+    {% for product in products %}
+
+    <div class="product-card">
+      <img src="{{ product['image'] }}" alt="{{ product['name'] }}" />
+
+      <div class="product-content">
+        <span class="category"> {{ product['category'] }} </span>
+
+        <h3>{{ product['name'] }}</h3>
+
+        <p>{{ product['description'] }}</p>
+
+        <div class="rating">⭐ {{ product['rating'] }}</div>
+
+        <div class="product-bottom">
+          <strong> ₹{{ product['price'] }} </strong>
+
+          <a
+            href="{{ url_for('add_to_cart',
+                                       product_id=product['id']) }}"
+            class="small-btn"
+          >
+            Add to Cart 🛒
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
